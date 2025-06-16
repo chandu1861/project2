@@ -1,0 +1,39 @@
+Pipeline {
+  agent any
+
+  stages {
+    stage ("checkout") {
+      steps {
+          git branch: 'main' url: ''
+      }
+    }
+
+    stage ("build") {
+      steps {
+          sh " docker build -t chandana1213/myimg:latest "
+      }
+    }
+
+    stage ("container creation") {
+      steps {
+          sh " docker run -it -d --name c1 chandana1213/myimg:latest /bin/bash"
+      }
+    }
+
+     stage ("docer hub") {
+      steps {
+          sh "docker push chandana1213/img:latest"
+      }
+    }
+
+    stage ("kubernetes") {
+      steps {
+        script {
+          kubectl delete pod --all
+          kubectl apply -f deployment.yaml
+          kubectl apply -f service.yaml
+        }
+      }
+    }
+    
+    
