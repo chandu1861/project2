@@ -21,8 +21,9 @@ Pipeline {
     }
 
      stage ("docer hub") {
-      steps {
-          sh "docker push chandana1213/img:latest"
+      steps {  
+         withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerpass', usernameVariable: 'dockeruser')]) 
+         sh "docker push chandana1213/img:latest"
       }
     }
 
