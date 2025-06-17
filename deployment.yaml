@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Deployment
 metadata:
-   name: deployment1
+   name: chandana
    labels: 
     app: project
 
