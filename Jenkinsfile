@@ -2,25 +2,25 @@ Pipeline {
   agent any
 
   stages {
-    stage ("checkout") {
+    stage ('checkout') {
       steps {
           git branch: 'main', url: 'https://github.com/chandu1861/project2.git'
       }
     }
 
-    stage ("build") {
+    stage ('build') {
       steps {
           sh " docker build -t chandana1213/myimg:latest "
       }
     }
 
-    stage ("container creation") {
+    stage ('container creation') {
       steps {
           sh " docker run -it -d --name c1 chandana1213/myimg:latest /bin/bash"
       }
     }
 
-     stage ("docer hub") {
+     stage ('docker hub') {
       steps {  
          withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerpass', usernameVariable: 'dockeruser')]) {  
           sh "docker push chandana1213/img:latest"
@@ -28,7 +28,7 @@ Pipeline {
       }
     }
 
-    stage ("kubernetes") {
+    stage ('kubernetes') {
       steps {
         script {
           withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'kubernetes', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') { 
