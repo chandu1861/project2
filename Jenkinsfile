@@ -22,17 +22,20 @@ Pipeline {
 
      stage ("docer hub") {
       steps {  
-         withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerpass', usernameVariable: 'dockeruser')]) 
-         sh "docker push chandana1213/img:latest"
+         withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerpass', usernameVariable: 'dockeruser')]) {  
+          sh "docker push chandana1213/img:latest"
+         }
       }
     }
 
     stage ("kubernetes") {
       steps {
         script {
-          kubectl delete pod --all
-          kubectl apply -f deployment.yaml
-          kubectl apply -f service.yaml
+          withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'kubernetes', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') { 
+           kubectl delete pod --all
+           kubectl apply -f deployment.yaml
+           kubectl apply -f service.yaml
+          }  
         }
       }
     }
