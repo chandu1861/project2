@@ -10,8 +10,7 @@ pipeline {
 
     stage ('build') {
       steps {
-          sh "docker build chandana1213/myimg ."
-          sh " docker tag -t chandana1213/myimg:latest "
+          sh " docker build -t chandana1213/myimg:latest ."
       }
     }
 
