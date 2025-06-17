@@ -17,7 +17,7 @@ spec:
      spec: 
         container: 
         - name: project
-          image: chandana1213/myimg:latest
+          image: chandana1213/myimg01:latest
           ports:
           - containerPort: 8000
   
