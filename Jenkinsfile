@@ -10,13 +10,13 @@ pipeline {
 
     stage ('build') {
       steps {
-          sh " docker build -t chandana1213/myimg:latest ."
+          sh " docker build -t chandana1213/myimg01:latest ."
       }
     }
 
     stage ('container creation') {
       steps {
-          sh " docker run -it -d --name c2 chandana1213/myimg:latest /bin/bash"
+          sh " docker run -it -d --name c2 chandana1213/myimg01:latest /bin/bash"
       }
     }
 
