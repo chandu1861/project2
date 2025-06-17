@@ -16,14 +16,14 @@ pipeline {
 
     stage ('container creation') {
       steps {
-          sh " docker run -it -d --name c1 chandana1213/myimg:latest /bin/bash"
+          sh " docker run -it -d --name c2 chandana1213/myimg:latest /bin/bash"
       }
     }
 
      stage ('docker hub') {
       steps {  
          withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerpass', usernameVariable: 'dockeruser')]) {  
-          sh "docker push chandana1213/img:latest"
+          sh "docker push chandana1213/myimg:latest"
          }
       }
     }
