@@ -4,7 +4,6 @@ metadata:
    name: chandana
    labels: 
     app: project
-
 spec:
   replicas: 4 
   selector:
@@ -12,10 +11,10 @@ spec:
         app: project
   template:
      metadata:
-        Labels:
+        labels:
           app: project
      spec: 
-        container: 
+        containers: 
         - name: project
           image: chandana1213/myimg01:latest
           ports:
